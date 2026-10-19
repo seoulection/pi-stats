@@ -18,7 +18,7 @@ def get_boot_time():
 
 def get_cpu_percent():
     return {
-            "cpu_percent": [0.14, 4.12, 9.12, 13.2]
+            "cpu_percent": psutil.cpu_percent(percpu=True)
     }
 
 def get_temperature():
