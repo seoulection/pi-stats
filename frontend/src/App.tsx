@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
+import { CpuCard } from './components/CpuCard'
 import './App.css'
 
 type Stats = {
   boot_time: string,
   uptime_seconds: number,
   temperature: number | null,
-  cpu_percent: number
+  cpu_percent: number[]
 }
 
 function formatUptime(s: number) {
@@ -49,15 +50,7 @@ function App() {
 
       {stats && (
         <section className="grid">
-          <article className="card">
-            <h2>CPU</h2>
-            <p className="value">
-              {stats.cpu_percent}<span className="unit">%</span>
-            </p>
-            <div className="bar">
-              <div className="bar-fill" style={{ width: `${stats.cpu_percent}%` }} />
-            </div>
-          </article>
+          <CpuCard cpuPercent={stats.cpu_percent} />
 
           <article className={`card temp-${tempLevel(stats.temperature)}`}>
             <h2>Temperature</h2>
