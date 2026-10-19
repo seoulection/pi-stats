@@ -28,14 +28,19 @@ function App() {
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    fetch('/api/stats')
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        setStats(data)
-        setError(false)
-      })
-      .catch(err => console.error(err))
+    const load = () => {
+      fetch('/api/stats')
+        .then(res => res.json())
+        .then(data => {
+          setStats(data)
+          setError(false)
+        })
+        .catch(err => console.error(err))
+    }
+
+    load()
+    const id = setInterval(load, 2000)
+    return () => clearInterval(id)
   }, [])
 
   return (
